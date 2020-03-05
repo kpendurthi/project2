@@ -1,4 +1,5 @@
 import React from 'react';
+import Parser from 'html-react-parser';
 const JobDetail = (props) => {
   
   return (
@@ -6,8 +7,8 @@ const JobDetail = (props) => {
         <img src={props.currentJob.company_logo} alt="logo" />
         <h3>{props.currentJob.type}/{props.currentJob.location}</h3>
         <h2>{props.currentJob.title}</h2>
-         {props.currentJob.description}
-         {props.currentJob.how_to_apply}
+         {Parser(props.currentJob.description)}
+         {Parser(props.currentJob.how_to_apply)}
       </div>
   )
 }
