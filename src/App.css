@@ -1,12 +1,3 @@
 .App {
   display: flex;
 }
-.side-nav {
-  width: 25%;
-}
-.top-nav {
-  width: 25%;
-}
-.Job-Details {
-  width: 70%;
-}
