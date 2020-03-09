@@ -5,6 +5,9 @@ class JobsList extends Component {
     constructor(props){
       super()
   }
+  componentDidMount(){
+      this.props.getAllJobs();
+  }
     render() {
       console.log("Joblist")
       console.log(this.props.jobs)

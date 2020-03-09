@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Route, Link, Switch}  from 'react-router-dom';
+import {Route, Link, Switch, withRouter}  from 'react-router-dom';
+
 import './App.css';
 import axios from 'axios';
 import JobDetails from './JobDetails'
@@ -14,7 +15,7 @@ class App extends Component {
       jobs:null,
       currentJob:null,
       jobDescription:'',
-      jobLoaction:''
+      jobLocation:''
     }
   }
 
@@ -23,18 +24,19 @@ class App extends Component {
     this.getAllJobs();
   }
 
-  handleClick = (job) => {
-    this.setState({
-      currentJob: job
-    })
+  handleClick = event => {
+    console.log("getalljobs")
+    this.getAllJobs();
   }
+
   handleDescChange = event => {
     let jobDescription = event.target.value
     this.setState({jobDescription})  
   }
+
   handleLocationChange = event => {
-    let jobLoaction = event.target.value
-    this.setState({jobLoaction})  
+    let jobLocation = event.target.value
+    this.setState({jobLocation})  
   }
 
   handleSubmit = event => {
@@ -42,8 +44,9 @@ class App extends Component {
     this.getJobs();
     let jobInfo = {
       jobDescription: this.state.jobDescription,
-      jobLoaction:    this.state.jobLoaction
+      jobLocation:    this.state.jobLocation
     }
+   
   }
 
   getAllJobs(){
@@ -58,6 +61,7 @@ class App extends Component {
         this.setState({
           jobs: response.data
         });   
+        this.props.history.push("/JobsList");
       }) 
       .catch(error => {
         console.log("errorsection")
@@ -68,7 +72,7 @@ class App extends Component {
   getJobs(){
     axios({
       method: "get",
-      url: `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${this.state.jobDescription}&location=${this.state.jobLoaction}`,
+      url: `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${this.state.jobDescription}&location=${this.state.jobLocation}`,
       //url: "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=python&location=new+york",
       headers: { Accept: "application/json" } 
     })
@@ -79,7 +83,7 @@ class App extends Component {
         this.setState({
           jobs: response.data
         });
-        
+        this.props.history.push("/JobsList");
       }) 
       .catch(error => {
         console.log("errorsection")
@@ -91,22 +95,26 @@ class App extends Component {
     console.log("render")
     console.log(this.state.jobs)
     console.log(this.state.jobDescription)
-    console.log(this.state.jobLoaction)
+    console.log(this.state.jobLocation)
     
     return (
       <div className='App'>
          <nav>
-           <Link to='/JobsList'> All Jobs </Link>
+           <div classname='joblist'>
+           <Link to='/JobsList' onClick={this.handleClick} > All Jobs </Link>
+           </div>
+           <div classname='jobsearch'>
           <JobSearch
                 handleDescChange={this.handleDescChange} 
                 handleLocationChange={this.handleLocationChange}
                 handleSubmit={this.handleSubmit}
           />
+          </div>
           </nav> 
           <main>
             <Switch>
               <Route path='/JobsList' exact 
-              render={()=>  <JobsList jobs={this.state.jobs}/>}/> 
+              render={()=>  <JobsList getAllJobs={this.getAllJobs} handleClick={this.handleClick} jobs={this.state.jobs}/>}/> 
               <Route path='/JobDetails/:id'  exact
               render={(props) => <JobDetails {...props} jobs={this.state.jobs}/>}/>
             </Switch>
@@ -116,4 +124,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
