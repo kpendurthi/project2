@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
-import {Route, Link, Switch, Redirect}  from 'react-router-dom';
+import {Route, Link, Switch}  from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import JobDetails from './JobDetails'
 import JobSearch from './JobSearch';
-import Header from './Header'
 import JobsList from './JobsList'
-
-//const gitHubUrl="https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=python&location=new+york"
-
-const gitHubUrl="https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=python&location=newyork"
 
 
 class App extends Component {

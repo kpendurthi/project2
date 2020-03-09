@@ -5,7 +5,7 @@ class JobSearch extends Component {
   }
   render() {
     return (
-      <div>
+      <div class="jobsearch">
         <form onSubmit={this.props.handleSubmit}>
           <input type='text' placeholder='job description' onChange={this.props.handleDescChange}/>
           <input type='text' placeholder='job location'onChange={this.props.handleLocationChange}/>

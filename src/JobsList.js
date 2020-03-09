@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import {Link} from 'react-router-dom'
 
 class JobsList extends Component {
@@ -19,7 +18,7 @@ class JobsList extends Component {
       })
   
       return (
-        <div>
+        <div class="joblist">
           <div className="JobList">{jobList}</div>
         </div>
       );
