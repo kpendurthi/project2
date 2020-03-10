@@ -9,8 +9,6 @@ class JobsList extends Component {
       this.props.getAllJobs();
   }
     render() {
-      console.log("Joblist")
-      console.log(this.props.jobs)
       let jobList=this.props.jobs.map((job,index)=>{
         return (
           <div key={job.id} >

@@ -20,12 +20,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("componetdidmount")
     this.getAllJobs();
   }
 
   handleClick = event => {
-    console.log("getalljobs")
     this.getAllJobs();
   }
 
@@ -46,7 +44,6 @@ class App extends Component {
       jobDescription: this.state.jobDescription,
       jobLocation:    this.state.jobLocation
     }
-   
   }
 
   getAllJobs(){
@@ -56,15 +53,13 @@ class App extends Component {
       headers: { Accept: "application/json" }  
     })
       .then(response => {
-        console.log("getalljobs")
-        console.log(response.data)
+
         this.setState({
           jobs: response.data
         });   
-        this.props.history.push("/JobsList");
+       // this.props.history.push("/JobsList");
       }) 
       .catch(error => {
-        console.log("errorsection")
         console.log(error);
       });
   }
@@ -73,34 +68,24 @@ class App extends Component {
     axios({
       method: "get",
       url: `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${this.state.jobDescription}&location=${this.state.jobLocation}`,
-      //url: "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=python&location=new+york",
       headers: { Accept: "application/json" } 
     })
       .then(response => {
-        console.log("getjobs")
-        console.log(this.url)
-        console.log(response.data)
         this.setState({
           jobs: response.data
         });
         this.props.history.push("/JobsList");
       }) 
       .catch(error => {
-        console.log("errorsection")
         console.log(error);
       });
   }
 
   render (){
-    console.log("render")
-    console.log(this.state.jobs)
-    console.log(this.state.jobDescription)
-    console.log(this.state.jobLocation)
-    
     return (
       <div className='App'>
          <nav>
-           <div classname='joblist'>
+           <div classname='header'>
            <Link to='/JobsList' onClick={this.handleClick} > All Jobs </Link>
            </div>
            <div classname='jobsearch'>
@@ -114,7 +99,7 @@ class App extends Component {
           <main>
             <Switch>
               <Route path='/JobsList' exact 
-              render={()=>  <JobsList getAllJobs={this.getAllJobs} handleClick={this.handleClick} jobs={this.state.jobs}/>}/> 
+              render={()=>  <JobsList getAllJobs={this.getAllJobs}  jobs={this.state.jobs}/>}/> 
               <Route path='/JobDetails/:id'  exact
               render={(props) => <JobDetails {...props} jobs={this.state.jobs}/>}/>
             </Switch>
