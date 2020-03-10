@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Route, Link, Switch, withRouter}  from 'react-router-dom';
-
 import './App.css';
 import axios from 'axios';
 import JobDetails from './JobDetails'
@@ -85,10 +84,10 @@ class App extends Component {
     return (
       <div className='App'>
          <nav>
-           <div classname='header'>
+           <div className='header'>
            <Link to='/JobsList' onClick={this.handleClick} > All Jobs </Link>
            </div>
-           <div classname='jobsearch'>
+           <div className='jobsearch'>
           <JobSearch
                 handleDescChange={this.handleDescChange} 
                 handleLocationChange={this.handleLocationChange}

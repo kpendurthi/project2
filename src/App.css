@@ -22,7 +22,7 @@ body {
 
 .App {
   background: cadetblue;
-  display: flex grid;
+  display: flex;
   height: 400vh;
   grid-template-columns: 33% 50% 33%;
   grid-template-rows: 100px 100px 200px 50px;
@@ -30,7 +30,7 @@ body {
 
 .joblist {
   grid-row: 1;
-  display: flex grid;
+  display: flex;
   grid-column: 2/ span 1;
 }
 
